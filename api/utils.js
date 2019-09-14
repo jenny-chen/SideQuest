@@ -20,16 +20,17 @@ const algolia = algoliasearch(
 );
 const index = algolia.initIndex(process.env.ALGOLIA_INDEX_NAME);
 
-const queryProjects = async (skills, interests) => {
+const queryProjects = async (skills, interests, query) => {
     /**
      * Use Algolia search sdk to fetch projects based on skills and interests.
+     * Combine all tags and raw query, to search all projects.
      */
 
     return (await index.search('projects', {
         // Use Algolia search sdk to fetch projects based on skills and interests.
 
         // The query string works well for matching the most relevant project based on contecated tags
-        query: skills.join() + interests.join(),
+        query: skills.join() + interests.join() + query,
 
         // TODO: Can also specify filters to limit search results to a few skills or interests
         // https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/how-to/filter-arrays/

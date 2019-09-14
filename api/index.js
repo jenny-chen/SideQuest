@@ -1,5 +1,7 @@
 const { queryProjects, addProject } = require('./utils');
 
+// TODO: support for keywords
+// TODO: clean up all files
 exports.searchProjects = async (request, response) => {
 
     if (request.method === 'OPTIONS') {
@@ -16,9 +18,9 @@ exports.searchProjects = async (request, response) => {
         const data = request.body;
         console.log("Request Data Body", data);
 
-        const {skills, interests} = data;
+        const {skills, interests, query} = data;
 
-        let results = await queryProjects(skills, interests);
+        let results = await queryProjects(skills, interests, query);
         console.log('Query Result', results);
 
         results = results.hits.map((result) => {

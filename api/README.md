@@ -7,11 +7,14 @@ Power project search queries. Upload data from Firebase to Algolia to manage sea
 ### POST /search-projects
 Uses Algolia to query most relvant projects based on skills and interests.
 
+Can specify a raw query text along with tags.
+
 Sample request
 ```json
 {
       "skills": ["react", "nodejs"],
-      "interests": ["healthcare", "non-profit"]
+      "interests": ["healthcare", "non-profit"],
+      "query": "Career Cards"
 }
 ```
 
