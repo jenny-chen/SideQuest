@@ -41,8 +41,8 @@ export default class SubmitPage extends Component {
                     ]
                 ]
             });
-            document.getElementById('skill').value = 'placeholder';
         }
+        document.getElementById('skill').value = 'placeholder';
     }
 
     interestSelect() {
@@ -63,8 +63,8 @@ export default class SubmitPage extends Component {
                     ]
                 ]
             });
-            document.getElementById('interest').value = 'placeholder';
         }
+        document.getElementById('interest').value = 'placeholder';
     }
 
     removeKeyword(value) {
