@@ -5,6 +5,8 @@ Power project search queries.
 ## Endpoints
 
 ### POST /search-projects
+Algolia for powering search
+https://itnext.io/how-to-add-fast-realtime-search-to-your-firebase-app-with-algolia-2491f7698d52
 
 Sample request
 ```json
@@ -38,3 +40,4 @@ Sample response
   }
 }
 ```
+
