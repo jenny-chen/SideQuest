@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from '../Components/Navbar';
+import axios from 'axios';
 
 const posInterests = [
     ['design', 'Design'],
@@ -37,6 +38,7 @@ export default class SearchPage extends Component {
         this.interestSelect = this.interestSelect.bind(this);
         this.removeKeyword = this.removeKeyword.bind(this);
         this.removeInterest = this.removeInterest.bind(this);
+        this.search = this.search.bind(this);
     }
 
     keywordSelect() {
@@ -72,7 +74,7 @@ export default class SearchPage extends Component {
         if (!alreadyIn) {
             this.setState({
                 interests: [
-                    ...(this.state.interests.filter((value) => { return value[0] != 'all'; })),
+                    ...(this.state.interests.filter((value) => { return value[0] !== 'all'; })),
                     [
                         document.getElementById('interest-select').value,
                         document.getElementById('interest-select').options[document.getElementById('interest-select').selectedIndex].text
@@ -103,6 +105,12 @@ export default class SearchPage extends Component {
                 });
             }
         });
+    }
+
+    async search() {
+        console.log(await axios.post('https://us-central1-graph-intelligence.cloudfunctions.net/searchProjects?fbclid=IwAR162ulayDPSRpwNfo2-vKlRrsJaouTGLbXY6J7LdrsQsuAgHmzOupDLTlo', {
+            crossdomain: true
+        }));
     }
 
     render() {
@@ -182,7 +190,7 @@ export default class SearchPage extends Component {
 
                             </div>
 
-                            <button className='btn btn-primary mt-3'>
+                            <button onClick={this.search} className='btn btn-primary mt-3'>
                                 Search
                             </button>
                         </div>
