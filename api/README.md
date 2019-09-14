@@ -67,7 +67,7 @@ Sample request
 ```
 
 Sample response
-```javascript
+```json
 {
     "status": "Success"
 }
