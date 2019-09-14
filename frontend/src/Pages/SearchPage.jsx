@@ -99,7 +99,8 @@ export default class SearchPage extends Component {
         });
         const res = (await axios.post('https://us-central1-graph-intelligence.cloudfunctions.net/searchProjects?fbclid=IwAR162ulayDPSRpwNfo2-vKlRrsJaouTGLbXY6J7LdrsQsuAgHmzOupDLTlo', {
             'skills': this.state.keywords,
-            'interests': this.state.interests
+            'interests': this.state.interests,
+            'query': document.getElementById('query').value
         }, {
             crossdomain: true
         })).data;
@@ -167,9 +168,15 @@ export default class SearchPage extends Component {
                             <h3>Search</h3>
                             <div className='mt-3'>
                                 <div className='mt-3'>
+
+                                    <div className="form-group">
+                                        <label htmlFor="query" className="font-weight-bold">Keywords: </label>
+                                        <input type="text" className="form-control" id='query' placeholder="Enter search keywords (optional)"></input>
+                                    </div>
+
                                     <div>
-                                        <div className='d-inline'>
-                                            Keywords:
+                                        <div className='d-inline font-weight-bold'>
+                                            Skills:
                                         </div>
                                         <div className='d-inline'>
                                             {keywordsList}
@@ -178,7 +185,7 @@ export default class SearchPage extends Component {
 
                                     <div className="input-group mt-2">
                                         <select className="custom-select" id="keyword-select" onChange={this.keywordSelect}>
-                                            <option value='placeholder' selected>Add Keyword...</option>
+                                            <option value='placeholder' selected>Add Skills...</option>
                                             {
                                                 posKeywords.map((value) => {
                                                     return (
@@ -192,7 +199,7 @@ export default class SearchPage extends Component {
 
                                 <div className='mt-3'>
                                     <div>
-                                        <div className='d-inline'>
+                                        <div className='d-inline font-weight-bold'>
                                             Related Field:
                                         </div>
                                         <div className='d-inline'>

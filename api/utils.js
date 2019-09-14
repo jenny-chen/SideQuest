@@ -19,6 +19,10 @@ const queryProjects = async (skills, interests) => {
     }));
 };
 
+const addPorject = async(data) => {
+    return (await index.addObject(data));
+}
+
 const a = async () => {
     console.log(await queryProjects(['Python']));
 };
