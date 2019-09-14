@@ -30,7 +30,7 @@ const queryProjects = async (skills, interests, query) => {
         // Use Algolia search sdk to fetch projects based on skills and interests.
 
         // The query string works well for matching the most relevant project based on contecated tags
-        query: skills.join() + interests.join() + query,
+        query: skills.join() + " " + interests.join() + " " + query,
 
         // TODO: Can also specify filters to limit search results to a few skills or interests
         // https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/how-to/filter-arrays/
@@ -58,23 +58,30 @@ const addProject = (data) => {
     })
 };
 
+// const a = async () => {
+//     console.log(await queryProjects(['React'], ["Eduction"], ""))
+//     console.log('res')
+// };
+//
+// a();
+
 module.exports = {
     queryProjects,
     addProject
 };
 
-console.log(addProject({
-    "name": "Test 123",
-    "description": "Testing",
-    "image": [
-        "https://pbs.twimg.com/profile_images/689335847427047425/6cpRle0x.jpg"
-    ],
-    "author": "Burgers Aditya",
-    "skills": [
-        "Python",
-        "ML"
-    ]
-}).then((res) => {
-    console.log(res);
-}));
+// console.log(addProject({
+//     "name": "Test 123",
+//     "description": "Testing",
+//     "image": [
+//         "https://pbs.twimg.com/profile_images/689335847427047425/6cpRle0x.jpg"
+//     ],
+//     "author": "Burgers Aditya",
+//     "skills": [
+//         "Python",
+//         "ML"
+//     ]
+// }).then((res) => {
+//     console.log(res);
+// }));
 

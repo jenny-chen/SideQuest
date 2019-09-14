@@ -1,7 +1,5 @@
 const { queryProjects, addProject } = require('./utils');
 
-// TODO: support for keywords
-// TODO: clean up all files
 exports.searchProjects = async (request, response) => {
 
     if (request.method === 'OPTIONS') {

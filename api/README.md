@@ -2,6 +2,11 @@
 
 Power project search queries. Upload data from Firebase to Algolia to manage searches. Using [Firebase and Algolia](https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/tutorials/firebase-algolia/).
 
+## Setup
+In Algolia dashboard, set searchable attributes. Also set attributes for faceting. 
+
+Look into importScript.js for functions to import data from .json into firebase and to import firebase data into Algolia.
+
 ## Endpoints
 
 ### POST /search-projects
@@ -76,6 +81,9 @@ Sample response
 }
 ```
 
-
+## Next Steps
+- [ ] Add firebase security rules
+- [ ] Improve Search Algorithm
+- [ ] Invoke cloud function to write to Algolia on DB change
 
 
