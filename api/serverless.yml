@@ -28,3 +28,8 @@ functions:
     handler: searchProjects
     events:
       - http: path
+
+  submit-project:
+    handler: addProject
+    events:
+      - http: path

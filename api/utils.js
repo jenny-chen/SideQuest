@@ -23,7 +23,7 @@ const queryProjects = async (skills, interests) => {
 
 const addProject = async(data) => {
     return (await index.addObject(data));
-}
+};
 
 module.exports = {
     queryProjects

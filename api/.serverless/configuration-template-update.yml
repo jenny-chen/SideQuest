@@ -10,7 +10,20 @@ resources:
       timeout: 60s
       function: searchProjects
       sourceArchiveUrl: >-
-        gs://sls-project-hunt-api-prod-1568442615144/serverless/project-hunt-api/prod/1568478601711-2019-09-14T16:30:01.711Z/project-hunt-api.zip
+        gs://sls-project-hunt-api-prod-1568442615144/serverless/project-hunt-api/prod/1568480494905-2019-09-14T17:01:34.905Z/project-hunt-api.zip
+      labels: {}
+      httpsTrigger:
+        url: path
+  - type: cloudfunctions.v1beta2.function
+    name: project-hunt-api-prod-submit-project
+    properties:
+      location: us-central1
+      availableMemoryMb: 256
+      runtime: nodejs8
+      timeout: 60s
+      function: addProject
+      sourceArchiveUrl: >-
+        gs://sls-project-hunt-api-prod-1568442615144/serverless/project-hunt-api/prod/1568480494905-2019-09-14T17:01:34.905Z/project-hunt-api.zip
       labels: {}
       httpsTrigger:
         url: path
