@@ -115,7 +115,7 @@ export default class SearchPage extends Component {
     render() {
         const keywordsList = this.state.keywords.map((value) => {
             return (
-                <span style={{ cursor: 'pointer' }} onClick={() => { this.removeKeyword(value[0]); }} key={value[0]} className="badge badge-secondary ml-1">{value[1]}</span>
+                <span style={{ cursor: 'pointer' }} onClick={() => { this.removeKeyword(value[0]); }} key={value[0]} className="badge badge-secondary ml-1">{value[1]} &times;</span>
             );
         });
 
@@ -126,24 +126,50 @@ export default class SearchPage extends Component {
                 );
             } else {
                 return (
-                    <span style={{ cursor: 'pointer' }} onClick={() => { this.removeInterest(value[0]); }} key={value[0]} className="badge badge-secondary ml-1">{value[1]}</span>
+                    <span style={{ cursor: 'pointer' }} onClick={() => { this.removeInterest(value[0]); }} key={value[0]} className="badge badge-secondary ml-1">{value[1]} &times;</span>
                 );
             }
         });
 
-        const projectList = this.state.projects.map((value) => {
+        const projectList = this.state.projects.map((value, i) => {
             return (
-                <div className='card mt-1 mx-2' style={{ width: '20rem' }} key={value.name}>
-                    <img src={value.image} className="card-img-top" alt="..." />
+                <div className='card mt-3 mx-2' style={{ width: '20rem' }} key={i}>
+                    <img height='300' style={{ objectFit: 'contain' }} src={value.image} className="card-img-top" alt="..." />
                     <div className='card-body'>
                         <h5 className='card-title'>{value.name}</h5>
                         <p className="card-text">{value.description}</p>
                         {
                             value.skills.map((value, i) => {
+                                let skillName = '';
+                                for (const posSkill of posKeywords) {
+                                    if (posSkill[0].toUpperCase() === value.toUpperCase()) {
+                                        skillName = posSkill[1];
+                                    }
+                                }
                                 return (
-                                    <span style={{ cursor: 'pointer' }} key={i} className="badge badge-secondary ml-1">{value}</span>
+                                    <span style={{ cursor: 'pointer' }} key={i} className="badge badge-secondary ml-1">{skillName}</span>
                                 );
                             })
+                        }
+                        <br />
+                        {
+                            value.interests ? value.interests.map((value, i) => {
+                                let skillName = '';
+                                for (const posSkill of posInterests) {
+                                    if (posSkill[0].toUpperCase() === value.toUpperCase()) {
+                                        skillName = posSkill[1];
+                                    }
+                                }
+                                return (
+                                    <span style={{ cursor: 'pointer' }} key={i} className="badge badge-primary ml-1">{skillName}</span>
+                                );
+                            }) : null
+                        }
+                        <br />
+                        {
+                            value.link ?
+                                <a href={value.link}>{value.link}</a>
+                                : null
                         }
                         <footer className="mt-2 blockquote-footer">
                             <small className="text-muted">
@@ -240,7 +266,7 @@ export default class SearchPage extends Component {
                     </div>
                     <div className='card mt-2'>
                         <div className="card-body">
-                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start' }}>
+                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', flexWrap: 'wrap' }}>
                                 {projectList}
                             </div>
                         </div>

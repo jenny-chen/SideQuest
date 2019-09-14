@@ -91,31 +91,36 @@ export default class SubmitPage extends Component {
             image: document.getElementById('image-url').value,
             name: document.getElementById('name').value,
             skills: this.state.keywords.map((value) => { return value[0]; }),
-            interests: this.state.interests.map((value) => { return value[0]; })
+            interests: this.state.interests.map((value) => { return value[0]; }),
+            link: document.getElementById('link').value
         };
         const res = (await axios.post('https://us-central1-graph-intelligence.cloudfunctions.net/addProject', object, {
             crossdomain: true
         })).data;
-        console.log(res);
+        document.getElementById('author').value = '';
+        document.getElementById('description').value = '';
+        document.getElementById('image-url').value = '';
+        document.getElementById('name').value = '';
+        document.getElementById('link').value = '';
     }
 
     render() {
         const keywordsList = this.state.keywords.map((value) => {
             return (
-                <span style={{ cursor: 'pointer' }} onClick={() => { this.removeKeyword(value[0]); }} key={value[0]} className="badge badge-secondary ml-1">{value[1]}</span>
+                <span style={{ cursor: 'pointer' }} onClick={() => { this.removeKeyword(value[0]); }} key={value[0]} className="badge badge-secondary ml-1">{value[1]} &times;</span>
             );
         });
 
         const interestsList = this.state.interests.map((value) => {
             return (
-                <span style={{ cursor: 'pointer' }} onClick={() => { this.removeInterest(value[0]); }} key={value[0]} className="badge badge-secondary ml-1">{value[1]}</span>
+                <span style={{ cursor: 'pointer' }} onClick={() => { this.removeInterest(value[0]); }} key={value[0]} className="badge badge-secondary ml-1">{value[1]} &times;</span>
             );
         });
 
         return (
             <div>
                 <Navbar />
-                <div className='container mt-4'>
+                <div className='container my-4'>
                     <form onSubmit={this.submit}>
                         <div className="form-group">
                             <label htmlFor="title" className="font-weight-bold">Project Title</label>
@@ -128,6 +133,10 @@ export default class SubmitPage extends Component {
                         <div className="form-group">
                             <label htmlFor="exampleFormControlInput1" className="font-weight-bold">Email Address</label>
                             <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" required />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="exampleFormControlInput1" className="font-weight-bold">Link</label>
+                            <input type="text" className="form-control" id="link" placeholder="www.example.com" />
                         </div>
 
                         <div className="row">
