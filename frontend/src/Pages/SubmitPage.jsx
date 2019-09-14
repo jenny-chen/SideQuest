@@ -160,7 +160,7 @@ export default class SubmitPage extends Component {
                             <div className="col">
                                 <div>
                                     <div className='d-inline font-weight-bold'>
-                                        Interests:
+                                        Related Fields:
                                     </div>
                                     <div className='d-inline'>
                                         {interestsList}
