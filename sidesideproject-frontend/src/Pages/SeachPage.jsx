@@ -1,6 +1,27 @@
 import React, { Component } from 'react';
 import Navbar from '../Components/Navbar';
 
+const posInterests = [
+    ['health', 'Healthcare'],
+    ['science', 'Science'],
+    ['design', 'Design'],
+    ['shopping', 'Shopping'],
+    ['sports', 'Sports'],
+    ['education', 'Education'],
+];
+
+const posKeywords = [
+    ['ml', 'Machine Learning'],
+    ['blockchain', 'Blockchain'],
+    ['api', 'API'],
+    ['ios', 'iOS'],
+    ['android', 'Android'],
+    ['web', 'Web'],
+    ['oop', 'Object Oriented'],
+    ['scripting', 'Scripting'],
+    ['graphic-design', 'Graphic Design'],
+];
+
 
 export default class SearchPage extends Component {
 
@@ -9,11 +30,13 @@ export default class SearchPage extends Component {
 
         this.state = {
             keywords: [],
-            interests: []
+            interests: [['all', 'All']]
         };
 
         this.keywordSelect = this.keywordSelect.bind(this);
         this.interestSelect = this.interestSelect.bind(this);
+        this.removeKeyword = this.removeKeyword.bind(this);
+        this.removeInterest = this.removeInterest.bind(this);
     }
 
     keywordSelect() {
@@ -34,12 +57,35 @@ export default class SearchPage extends Component {
                     ]
                 ]
             });
+            document.getElementById('keyword-select').value = 'placeholder';
         }
+    }
+
+    removeKeyword(value) {
+        this.setState({
+            keywords: this.state.keywords.filter((keyValue) => {
+                return keyValue[0] !== value;
+            })
+        });
+    }
+
+    removeInterest(value) {
+        this.setState({
+            interests: this.state.interests.filter((keyValue) => {
+                return keyValue[0] !== value;
+            })
+        }, () => {
+            if (this.state.interests.length === 0) {
+                this.setState({
+                    interests: [['all', 'All']]
+                });
+            }
+        });
     }
 
     interestSelect() {
         let alreadyIn = false;
-        for (const keywordObj of this.state.keywords) {
+        for (const keywordObj of this.state.interests) {
             if (keywordObj[0] === document.getElementById('interest-select').value) {
                 alreadyIn = true;
                 break;
@@ -47,28 +93,35 @@ export default class SearchPage extends Component {
         }
         if (!alreadyIn) {
             this.setState({
-                keywords: [
-                    ...this.state.keywords,
+                interests: [
+                    ...(this.state.interests.filter((value) => { return value[0] != 'all'; })),
                     [
                         document.getElementById('interest-select').value,
                         document.getElementById('interest-select').options[document.getElementById('interest-select').selectedIndex].text
                     ]
                 ]
             });
+            document.getElementById('interest-select').value = 'placeholder';
         }
     }
 
     render() {
         const keywordsList = this.state.keywords.map((value) => {
             return (
-                <span key={value[0]} className="badge badge-secondary ml-1">{value[1]}</span>
+                <span style={{ cursor: 'pointer' }} onClick={() => { this.removeKeyword(value[0]); }} key={value[0]} className="badge badge-secondary ml-1">{value[1]}</span>
             );
         });
 
-        const interetsList = this.state.interests.map((value) => {
-            return (
-                <span key={value[0]} className="badge badge-secondary ml-1">{value[1]}</span>
-            );
+        const interestsList = this.state.interests.map((value) => {
+            if (value[0] === 'all') {
+                return (
+                    <span style={{ cursor: 'pointer' }} key={value[0]} className="badge badge-secondary ml-1">{value[1]}</span>
+                );
+            } else {
+                return (
+                    <span style={{ cursor: 'pointer' }} onClick={() => { this.removeInterest(value[0]); }} key={value[0]} className="badge badge-secondary ml-1">{value[1]}</span>
+                );
+            }
         });
 
         return (
@@ -91,10 +144,14 @@ export default class SearchPage extends Component {
 
                                     <div className="input-group mt-2">
                                         <select className="custom-select" id="keyword-select" onChange={this.keywordSelect}>
-                                            <option selected>Add Keyword...</option>
-                                            <option value="react">React</option>
-                                            <option value="node-js">Node.js</option>
-                                            <option value="html">HTML</option>
+                                            <option value='placeholder' selected>Add Keyword...</option>
+                                            {
+                                                posKeywords.map((value) => {
+                                                    return (
+                                                        <option key={value[0]} value={value[0]}>{value[1]}</option>
+                                                    );
+                                                })
+                                            }
                                         </select>
                                     </div>
                                 </div>
@@ -105,16 +162,20 @@ export default class SearchPage extends Component {
                                             Interests:
                                         </div>
                                         <div className='d-inline'>
-                                            {interetsList}
+                                            {interestsList}
                                         </div>
                                     </div>
 
                                     <div className="input-group mt-2">
-                                        <select className="custom-select" id="interset-select">
-                                            <option selected>Add Interest...</option>
-                                            <option value="science">Science</option>
-                                            <option value="chemistry">Chemistry</option>
-                                            <option value="biology">Biology</option>
+                                        <select className="custom-select" id="interest-select" onChange={this.interestSelect}>
+                                            <option value='placeholder' selected>Add Interest...</option>
+                                            {
+                                                posInterests.map((value) => {
+                                                    return (
+                                                        <option key={value[0]} value={value[0]}>{value[1]}</option>
+                                                    );
+                                                })
+                                            }
                                         </select>
                                     </div>
                                 </div>
