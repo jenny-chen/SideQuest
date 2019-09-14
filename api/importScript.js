@@ -1,10 +1,8 @@
 const algoliasearch = require('algoliasearch');
 let firebase = require('firebase-admin');
-
 const dotenv = require('dotenv');
 
 const seedProjects = require('./seedProjects.json');
-
 
 // load values from the .env file in this directory into process.env
 dotenv.config();
@@ -24,7 +22,7 @@ const algolia = algoliasearch(
 );
 const index = algolia.initIndex(process.env.ALGOLIA_INDEX_NAME);
 
-// Adding a few projects
+// Adding seed projects to firebase
 Promise.all(
     seedProjects.map((project) => {
         return database.ref('/projects').push(project)
@@ -34,9 +32,8 @@ Promise.all(
     console.error("Error adding contacts to Firebase", error);
 });
 
-
 // Importing to Algolia
-// Get all contacts from Firebase
+// Get all projects from Firebase
 database.ref('/projects').once('value', projects => {
     // Build an array of all records to push to Algolia
     const records = [];
@@ -54,20 +51,18 @@ database.ref('/projects').once('value', projects => {
     index
         .saveObjects(records)
         .then(() => {
-            console.log('Contacts imported into Algolia');
+            console.log('Projects imported into Algolia');
             process.exit(0)
         })
         .catch(error => {
-            console.error('Error when importing contact into Algolia', error);
+            console.error('Error when importing projects into Algolia', error);
         });
 });
 
-
-
-// Set filter attributes
+// Set attributes for filtering
 index.setSettings({
     attributesForFaceting: [
-        'skills'
-
+        'skills',
+        'interests'
     ]
 });

@@ -1,16 +1,11 @@
-# Project Hunt API
+# SideQuest API
 
-Power project search queries.
+Power project search queries. Upload data from Firebase to Algolia to manage searches. Using [Firebase and Algolia](https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/tutorials/firebase-algolia/).
 
 ## Endpoints
 
 ### POST /search-projects
-Algolia for powering search
-https://itnext.io/how-to-add-fast-realtime-search-to-your-firebase-app-with-algolia-2491f7698d52
-
-https://angularfirebase.com/lessons/angular-full-text-search-with-algolia-backend-part-2/
-
-https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/tutorials/firebase-algolia/#create-a-nodejs-application
+Uses Algolia to query most relvant projects based on skills and interests.
 
 Sample request
 ```json
@@ -46,4 +41,38 @@ Sample response
   }
 }
 ```
+
+### POST /submit-project
+
+Allows for users to submit a new project.
+
+Sample request
+```json
+{
+    "name": "Postman Test 123",
+    "description": "Testing ...",
+    "image": [
+        "https://pbs.twimg.com/profile_images/689335847427047425/6cpRle0x.jpg"
+    ],
+    "author": "Burgers Aditya",
+    "skills": [
+        "Python",
+        "ML"
+    ],
+    "interests": [
+    	"Education",
+    	"Healthcare"
+    ]
+}
+```
+
+Sample response
+```javascript
+{
+    "status": "Success"
+}
+```
+
+
+
 
