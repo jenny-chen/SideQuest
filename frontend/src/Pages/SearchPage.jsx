@@ -99,7 +99,7 @@ export default class SearchPage extends Component {
         });
         const object = {
             'skills': this.state.keywords.map((value) => { return (value[0]); }),
-            'interests': this.state.interests.map((value) => { return (value[0]); })
+            'interests': this.state.interests[0][0] === 'all' ? '' : this.state.interests.map((value) => { return (value[0]); })
             //'query': document.getElementById('query').value
         };
         console.log(object);
