@@ -228,7 +228,7 @@ export default class SearchPage extends Component {
                                 <div className='mt-3'>
                                     <div>
                                         <div className='d-inline font-weight-bold'>
-                                            Related Field:
+                                            Related Fields:
                                         </div>
                                         <div className='d-inline'>
                                             {interestsList}
@@ -237,7 +237,7 @@ export default class SearchPage extends Component {
 
                                     <div className="input-group mt-2">
                                         <select className="custom-select" id="interest-select" onChange={this.interestSelect}>
-                                            <option value='placeholder' selected>Add Related Field...</option>
+                                            <option value='placeholder' selected>Add Related Fields...</option>
                                             {
                                                 posInterests.map((value) => {
                                                     return (

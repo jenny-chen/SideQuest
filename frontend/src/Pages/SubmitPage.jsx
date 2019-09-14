@@ -175,7 +175,7 @@ export default class SubmitPage extends Component {
 
                                 <div className="input-group mt-2">
                                     <select id='interest' className="custom-select" onChange={this.interestSelect}>
-                                        <option value='placeholder' selected>Add Interest...</option>
+                                        <option value='placeholder' selected>Add Related Fields...</option>
                                         {
                                             posInterests.map((value) => {
                                                 return (
