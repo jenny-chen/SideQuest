@@ -49,20 +49,30 @@ exports.addProject = async (request, response) => {
     // TODO: see how to parse post requests https://cloud.google.com/functions/docs/writing/http#parsing_http_requests
     // TODO: read token from firebase
 
-    const data = request.body;
+    if (request.method === 'OPTIONS') {
+        // Send response to OPTIONS requests
+        response.set('Access-Control-Allow-Methods', 'POST');
+        response.set('Access-Control-Allow-Headers', 'Content-Type');
+        response.set('Access-Control-Allow-Origin', '*');
+        response.set('Access-Control-Max-Age', '3600');
+        response.status(204).send('');
 
-    let results = await addProject(data);
+    } else {
+        const data = request.body;
 
-    response.set({
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'DELETE,GET,PATCH,POST,PUT',
-        'Access-Control-Allow-Headers': 'Content-Type,Authorization'
-    });
+        let results = await addProject(data);
 
-    response.set('Content-Type', 'application/json');
-    response.status(200).send({
-        "res": results
-    });
+        response.set({
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE,GET,PATCH,POST,PUT',
+            'Access-Control-Allow-Headers': 'Content-Type,Authorization'
+        });
+
+        response.set('Content-Type', 'application/json');
+        response.status(200).send({
+            "res": results
+        });
+    }
 };
 
 

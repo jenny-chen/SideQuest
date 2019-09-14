@@ -9,7 +9,7 @@
         "skills": [
             "Python",
         ]
-    }
+    },
   {
         "name": "Wey",
         "description": "Fast open source Slack desktop app, written in Node.js with native UI powered by the Yue library.",
