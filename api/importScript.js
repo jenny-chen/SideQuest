@@ -2,6 +2,8 @@ const algoliasearch = require('algoliasearch');
 const dotenv = require('dotenv');
 let firebase = require('firebase-admin');
 
+const seedProjects = require('./seedProjects.json');
+
 // load values from the .env file in this directory into process.env
 dotenv.config();
 
@@ -20,27 +22,15 @@ const algolia = algoliasearch(
 );
 const index = algolia.initIndex(process.env.ALGOLIA_INDEX_NAME);
 
-const seedProjects = [
-    {
-        "name": "Fun Project",
-        "description": "Ipsum Dolor",
-        "image": ["https://cdn.pixabay.com/photo/2016/12/13/05/15/puppy-1903313__340.jpg"],
-        "author": "Marko",
-        "skills": ["Python", "React", "Firebase"]
-    }
-];
-
-// // Adding a few projects
-// Promise.all(
-//     seedProjects.map((project) => {
-//         return database.ref('/projects').push(project)
-//     })).then(() => {
-//     console.log("Project added to Firebase");
-//     process.exit(0);
-// }).catch(error => {
-//     console.error("Error adding contacts to Firebase", error);
-//     process.exit(1);
-// });
+// Adding a few projects
+Promise.all(
+    seedProjects.map((project) => {
+        return database.ref('/projects').push(project)
+    })).then(() => {
+    console.log("Project added to Firebase");
+}).catch(error => {
+    console.error("Error adding contacts to Firebase", error);
+});
 
 
 // Importing to Algolia
@@ -63,9 +53,9 @@ database.ref('/projects').once('value', projects => {
         .saveObjects(records)
         .then(() => {
             console.log('Contacts imported into Algolia');
+            process.exit(0)
         })
         .catch(error => {
             console.error('Error when importing contact into Algolia', error);
-            process.exit(1);
         });
 });

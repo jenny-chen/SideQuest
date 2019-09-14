@@ -38,6 +38,10 @@ Sample response
           "Python",
           "React",
           "Firebase"
+        ],
+        "interests": [
+          "Healthcare",
+          "Education"
         ]
       }
     ]
