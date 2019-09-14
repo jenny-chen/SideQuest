@@ -14,19 +14,21 @@ const index = algolia.initIndex(process.env.ALGOLIA_INDEX_NAME);
 const queryProjects = async (skills, interests) => {
 
     return (await index.search('projects', {
-        // filters: 'skills:Python AND store:Gibert Joseph Saint-Michel'
-        filters: 'skills:Python'
+        // filters: 'skills:Python AND store:Gibert Joseph Saint-Michel',
+        // TODO: better filter method
+        query: skills.join(),
+        // filters: 'skills:Python OR skills:Ascii'
     }));
 };
 
-const a = async () => {
-    console.log(await queryProjects(['Python']));
-};
-
-a();
-
-
-// module.exports = {
-//     queryProjects
+// const a = async () => {
+//     console.log(await queryProjects(['Python', 'Ascii']));
 // };
+//
+// a();
+
+
+module.exports = {
+    queryProjects
+};
 
