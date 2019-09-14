@@ -66,7 +66,7 @@ database.ref('/projects').once('value', projects => {
 // Set filter attributes
 index.setSettings({
     attributesForFaceting: [
-        'categories', // or 'filterOnly(categories)' for filtering purposes only
-        'store' // or 'filterOnly(store)' for filtering purposes only
+        'skills'
+
     ]
 });

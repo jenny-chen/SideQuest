@@ -8,8 +8,9 @@
     "author": "Ramesh Aditya",
     "skills": [
         "Python",
+        "Ascii"
     ]
-  }
+  },
   {
       "name": "Wey",
       "description": "Fast open source Slack desktop app, written in Node.js with native UI powered by the Yue library.",
@@ -19,10 +20,10 @@
       "author": "Yue",
       "skills": [
           "Node.js",
-          "Javascript",
+          "Javascript"
       ]
       
-  }
+  },
   {
       "name": "Fun Project",
       "description": "Ipsum Dolor",
