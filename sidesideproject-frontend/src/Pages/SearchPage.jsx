@@ -31,7 +31,8 @@ export default class SearchPage extends Component {
 
         this.state = {
             keywords: [],
-            interests: [['all', 'All']]
+            interests: [['all', 'All']],
+            projects: []
         };
 
         this.keywordSelect = this.keywordSelect.bind(this);
@@ -108,9 +109,12 @@ export default class SearchPage extends Component {
     }
 
     async search() {
-        console.log(await axios.post('https://us-central1-graph-intelligence.cloudfunctions.net/searchProjects?fbclid=IwAR162ulayDPSRpwNfo2-vKlRrsJaouTGLbXY6J7LdrsQsuAgHmzOupDLTlo', {
+        const res = (await axios.post('https://us-central1-graph-intelligence.cloudfunctions.net/searchProjects?fbclid=IwAR162ulayDPSRpwNfo2-vKlRrsJaouTGLbXY6J7LdrsQsuAgHmzOupDLTlo', {
             crossdomain: true
-        }));
+        })).data;
+        this.setState({
+            projects: res.body.projects
+        });
     }
 
     render() {
@@ -131,6 +135,36 @@ export default class SearchPage extends Component {
                 );
             }
         });
+
+        const projectList = this.state.projects.map((value) => {
+            return (
+                <div className='card mt-1 mx-2' style={{ width: '20rem' }} key={value.name}>
+                    <img src={value.image} className="card-img-top" alt="..." />
+                    <div className='card-body'>
+                        <h5 className='card-title'>{value.name}</h5>
+                        <p className="card-text">{value.description}</p>
+                        {
+                            value.skills.map((value) => {
+                                return (
+                                    <span style={{ cursor: 'pointer' }} key={value} className="badge badge-secondary ml-1">{value}</span>
+                                );
+                            })
+                        }
+                        <footer className="mt-2 blockquote-footer">
+                            <small className="text-muted">
+                                {value.author}
+                            </small>
+                        </footer>
+                    </div>
+                </div>
+            );
+        });
+
+        if (projectList.length === 0) {
+            projectList.push(
+                <p>No projects found.</p>
+            );
+        }
 
         return (
             <div>
@@ -195,8 +229,15 @@ export default class SearchPage extends Component {
                             </button>
                         </div>
                     </div>
+                    <div className='card mt-2'>
+                        <div className="card-body">
+                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start' }}>
+                                {projectList}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </div >
         );
     }
 }
