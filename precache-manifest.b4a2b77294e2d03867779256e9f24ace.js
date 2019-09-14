@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f1ab51ed4204fae149ce2ee1e8ff0b80",
+    "revision": "897a17f2e4cc1f9fa03e2bfeabceec11",
     "url": "/SideQuest/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/SideQuest/static/js/2.c099bfa7.chunk.js"
   },
   {
-    "revision": "ce126c920a375f996c1d",
-    "url": "/SideQuest/static/js/main.b66f76c2.chunk.js"
+    "revision": "74baa7d06747ac1ee706",
+    "url": "/SideQuest/static/js/main.0b32a29d.chunk.js"
   },
   {
     "revision": "959c30587ea28305b8a2",
