@@ -1,6 +1,7 @@
 const algoliasearch = require('algoliasearch');
-const dotenv = require('dotenv');
 let firebase = require('firebase-admin');
+
+const dotenv = require('dotenv');
 
 const seedProjects = require('./seedProjects.json');
 
