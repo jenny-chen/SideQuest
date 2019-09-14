@@ -35,6 +35,7 @@ export default class SubmitPage extends Component {
         this.interestSelect = this.interestSelect.bind(this);
         this.removeKeyword = this.removeKeyword.bind(this);
         this.removeInterest = this.removeInterest.bind(this);
+        this.submit = this.submit.bind(this);
     }
 
     keywordSelect() {
@@ -97,6 +98,10 @@ export default class SubmitPage extends Component {
         });
     }
 
+    submit() {
+        alert('submit!');
+    }
+
     render() {
         const keywordsList = this.state.keywords.map((value) => {
             return (
@@ -116,20 +121,20 @@ export default class SubmitPage extends Component {
                 <div className='container mt-4'>
                     <form>
                         <div className="form-group">
-                            <label htmlFor="title" class="font-weight-bold">Project Title</label>
-                            <input type="text" className="form-control" placeholder="My Project"></input>
+                            <label htmlFor="title" className="font-weight-bold">Project Title</label>
+                            <input type="text" className="form-control" placeholder="My Project" required></input>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="author" class="font-weight-bold">Author</label>
-                            <input type="text" className="form-control" placeholder="John Doe"></input>
+                            <label htmlFor="author" className="font-weight-bold">Author</label>
+                            <input type="text" className="form-control" placeholder="John Doe" required></input>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="exampleFormControlInput1" class="font-weight-bold">Email Address</label>
-                            <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+                            <label htmlFor="exampleFormControlInput1" className="font-weight-bold">Email Address</label>
+                            <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" required />
                         </div>
 
-                        <div class="row">
-                            <div class="col">
+                        <div className="row">
+                            <div className="col">
                                 <div>
                                     <div className='d-inline font-weight-bold'>
                                         Keywords:
@@ -152,7 +157,7 @@ export default class SubmitPage extends Component {
                                     </select>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div className="col">
                                 <div>
                                     <div className='d-inline font-weight-bold'>
                                         Interests:
@@ -177,36 +182,16 @@ export default class SubmitPage extends Component {
                             </div>
                         </div>
 
-
                         <div className="form-group mt-3">
-                            <label htmlFor="exampleFormControlSelect1" class="font-weight-bold">Example select</label>
-                            <select className="form-control" id="exampleFormControlSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
+                            <label className="font-weight-bold">Project Description</label>
+                            <textarea className="form-control" rows="3" required></textarea>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="exampleFormControlSelect2" class="font-weight-bold">Example multiple select</label>
-                            <select multiple className="form-control" id="exampleFormControlSelect2">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
+                            <label className="font-weight-bold">Image URL</label>
+                            <input type="text" className="form-control" placeholder="Enter image URL" />
                         </div>
 
-                        <div className="form-group">
-                            <label htmlFor="exampleFormControlTextarea1" class="font-weight-bold">Project Description</label>
-                            <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlFile1" class="font-weight-bold">File Upload</label>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple></input>
-                        </div>
+                        <button className='btn btn-primary'>Submit</button>
                     </form>
                 </div>
             </div>

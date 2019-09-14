@@ -32,7 +32,8 @@ export default class SearchPage extends Component {
         this.state = {
             keywords: [],
             interests: [['all', 'All']],
-            projects: []
+            projects: [],
+            searching: false
         };
 
         this.keywordSelect = this.keywordSelect.bind(this);
@@ -109,11 +110,15 @@ export default class SearchPage extends Component {
     }
 
     async search() {
+        this.setState({
+            searching: true
+        });
         const res = (await axios.post('https://us-central1-graph-intelligence.cloudfunctions.net/searchProjects?fbclid=IwAR162ulayDPSRpwNfo2-vKlRrsJaouTGLbXY6J7LdrsQsuAgHmzOupDLTlo', {
             crossdomain: true
         })).data;
         this.setState({
-            projects: res.body.projects
+            projects: res.body.projects,
+            searching: false
         });
     }
 
@@ -225,7 +230,15 @@ export default class SearchPage extends Component {
                             </div>
 
                             <button onClick={this.search} className='btn btn-primary mt-3'>
-                                Search
+                                <div>
+                                    {
+                                        this.state.searching ?
+                                            <span className="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
+                                            :
+                                            null
+                                    }
+                                    Search
+                                </div>
                             </button>
                         </div>
                     </div>
