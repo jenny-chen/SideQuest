@@ -1,0 +1,74 @@
+{
+    "interests": [
+        [
+            "design",
+            "Design"
+        ],
+        [
+            "education",
+            "Education"
+        ],
+        [
+            "health",
+            "Healthcare"
+        ],
+        [
+            "science",
+            "Science"
+        ],
+        [
+            "shopping",
+            "Shopping"
+        ],
+        [
+            "sports",
+            "Sports"
+        ]
+    ],
+    "keywords": [
+        [
+            "android",
+            "Android"
+        ],
+        [
+            "api",
+            "API"
+        ],
+        [
+            "blockchain",
+            "Blockchain"
+        ],
+        [
+            "graphic-design",
+            "Graphic Design"
+        ],
+        [
+            "ios",
+            "iOS"
+        ],
+        [
+            "ml",
+            "Machine Learning"
+        ],
+        [
+            "oop",
+            "Object Oriented"
+        ],
+        [
+            "firebase",
+            "Firebase"
+        ],
+        [
+            "python",
+            "Python"
+        ],
+        [
+            "react",
+            "React"
+        ],
+        [
+            "angular",
+            "Angular"
+        ]
+    ]
+}
