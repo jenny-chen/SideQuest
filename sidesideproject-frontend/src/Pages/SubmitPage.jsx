@@ -30,6 +30,71 @@ export default class SubmitPage extends Component {
             keywords: [],
             interests: [],
         };
+
+        this.keywordSelect = this.keywordSelect.bind(this);
+        this.interestSelect = this.interestSelect.bind(this);
+        this.removeKeyword = this.removeKeyword.bind(this);
+        this.removeInterest = this.removeInterest.bind(this);
+    }
+
+    keywordSelect() {
+        let alreadyIn = false;
+        for (const keywordObj of this.state.keywords) {
+            if (keywordObj[0] === document.getElementById('keyword-select').value) {
+                alreadyIn = true;
+                break;
+            }
+        }
+        if (!alreadyIn) {
+            this.setState({
+                keywords: [
+                    ...this.state.keywords,
+                    [
+                        document.getElementById('keyword-select').value,
+                        document.getElementById('keyword-select').options[document.getElementById('keyword-select').selectedIndex].text
+                    ]
+                ]
+            });
+            document.getElementById('keyword-select').value = 'placeholder';
+        }
+    }
+
+    interestSelect() {
+        let alreadyIn = false;
+        for (const keywordObj of this.state.interests) {
+            if (keywordObj[0] === document.getElementById('interest-select').value) {
+                alreadyIn = true;
+                break;
+            }
+        }
+        if (!alreadyIn) {
+            this.setState({
+                interests: [
+                    ...(this.state.interests.filter((value) => { return value[0] !== 'all'; })),
+                    [
+                        document.getElementById('interest-select').value,
+                        document.getElementById('interest-select').options[document.getElementById('interest-select').selectedIndex].text
+                    ]
+                ]
+            });
+            document.getElementById('interest-select').value = 'placeholder';
+        }
+    }
+
+    removeKeyword(value) {
+        this.setState({
+            keywords: this.state.keywords.filter((keyValue) => {
+                return keyValue[0] !== value;
+            })
+        });
+    }
+
+    removeInterest(value) {
+        this.setState({
+            interests: this.state.interests.filter((keyValue) => {
+                return keyValue[0] !== value;
+            })
+        });
     }
 
     render() {
@@ -63,31 +128,57 @@ export default class SubmitPage extends Component {
                             <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
                         </div>
 
+                        <div class="row">
+                            <div class="col">
+                                <div>
+                                    <div className='d-inline font-weight-bold'>
+                                        Keywords:
+                                    </div>
+                                    <div className='d-inline'>
+                                        {keywordsList}
+                                    </div>
+                                </div>
 
-                        <div>
-                            <div className='d-inline'>
-                                Keywords:
+                                <div className="input-group mt-2">
+                                    <select className="custom-select" id="keyword-select" onChange={this.keywordSelect}>
+                                        <option value='placeholder' selected>Add Keyword...</option>
+                                        {
+                                            posKeywords.map((value) => {
+                                                return (
+                                                    <option key={value[0]} value={value[0]}>{value[1]}</option>
+                                                );
+                                            })
+                                        }
+                                    </select>
+                                </div>
                             </div>
-                            <div className='d-inline'>
-                                {keywordsList}
+                            <div class="col">
+                                <div>
+                                    <div className='d-inline font-weight-bold'>
+                                        Interests:
+                                    </div>
+                                    <div className='d-inline'>
+                                        {interestsList}
+                                    </div>
+                                </div>
+
+                                <div className="input-group mt-2">
+                                    <select className="custom-select" id="interest-select" onChange={this.interestSelect}>
+                                        <option value='placeholder' selected>Add Interest...</option>
+                                        {
+                                            posInterests.map((value) => {
+                                                return (
+                                                    <option key={value[0]} value={value[0]}>{value[1]}</option>
+                                                );
+                                            })
+                                        }
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
-                        <div className="input-group mt-2">
-                            <select className="custom-select" id="keyword-select" onChange={this.keywordSelect}>
-                                <option value='placeholder' selected>Add Keyword...</option>
-                                {
-                                    posKeywords.map((value) => {
-                                        return (
-                                            <option key={value[0]} value={value[0]}>{value[1]}</option>
-                                        );
-                                    })
-                                }
-                            </select>
-                        </div>
 
-
-                        <div className="form-group">
+                        <div className="form-group mt-3">
                             <label htmlFor="exampleFormControlSelect1" class="font-weight-bold">Example select</label>
                             <select className="form-control" id="exampleFormControlSelect1">
                                 <option>1</option>
