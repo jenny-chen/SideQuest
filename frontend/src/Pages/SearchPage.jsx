@@ -45,8 +45,8 @@ export default class SearchPage extends Component {
                     ]
                 ]
             });
-            document.getElementById('keyword-select').value = 'placeholder';
         }
+        document.getElementById('keyword-select').value = 'placeholder';
     }
 
     interestSelect() {
@@ -67,8 +67,8 @@ export default class SearchPage extends Component {
                     ]
                 ]
             });
-            document.getElementById('interest-select').value = 'placeholder';
         }
+        document.getElementById('interest-select').value = 'placeholder';
     }
 
     removeKeyword(value) {
