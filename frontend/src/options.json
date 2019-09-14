@@ -23,6 +23,18 @@
         [
             "sports",
             "Sports"
+        ],
+        [
+            "math",
+            "Mathematics"
+        ],
+        [
+            "finance",
+            "Finance"
+        ],
+        [
+            "gaming",
+            "Gaming"
         ]
     ],
     "keywords": [
@@ -69,6 +81,10 @@
         [
             "angular",
             "Angular"
+        ],
+        [
+            "webdev",
+            "Web Development"
         ]
     ]
 }
