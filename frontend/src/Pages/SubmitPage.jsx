@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from '../Components/Navbar';
 import options from '../options.json';
+import axios from 'axios';
 
 const posInterests = options.interests;
 
@@ -25,7 +26,7 @@ export default class SubmitPage extends Component {
     keywordSelect() {
         let alreadyIn = false;
         for (const keywordObj of this.state.keywords) {
-            if (keywordObj[0] === document.getElementById('keyword-select').value) {
+            if (keywordObj[0] === document.getElementById('skill').value) {
                 alreadyIn = true;
                 break;
             }
@@ -35,19 +36,19 @@ export default class SubmitPage extends Component {
                 keywords: [
                     ...this.state.keywords,
                     [
-                        document.getElementById('keyword-select').value,
-                        document.getElementById('keyword-select').options[document.getElementById('keyword-select').selectedIndex].text
+                        document.getElementById('skill').value,
+                        document.getElementById('skill').options[document.getElementById('skill').selectedIndex].text
                     ]
                 ]
             });
-            document.getElementById('keyword-select').value = 'placeholder';
+            document.getElementById('skill').value = 'placeholder';
         }
     }
 
     interestSelect() {
         let alreadyIn = false;
         for (const keywordObj of this.state.interests) {
-            if (keywordObj[0] === document.getElementById('interest-select').value) {
+            if (keywordObj[0] === document.getElementById('interest').value) {
                 alreadyIn = true;
                 break;
             }
@@ -57,12 +58,12 @@ export default class SubmitPage extends Component {
                 interests: [
                     ...(this.state.interests.filter((value) => { return value[0] !== 'all'; })),
                     [
-                        document.getElementById('interest-select').value,
-                        document.getElementById('interest-select').options[document.getElementById('interest-select').selectedIndex].text
+                        document.getElementById('interest').value,
+                        document.getElementById('interest').options[document.getElementById('interest').selectedIndex].text
                     ]
                 ]
             });
-            document.getElementById('interest-select').value = 'placeholder';
+            document.getElementById('interest').value = 'placeholder';
         }
     }
 
@@ -82,8 +83,20 @@ export default class SubmitPage extends Component {
         });
     }
 
-    submit() {
-        alert('submit!');
+    async submit(e) {
+        e.preventDefault();
+        const object = {
+            author: document.getElementById('author').value,
+            description: document.getElementById('description').value,
+            image: document.getElementById('image-url').value,
+            name: document.getElementById('name').value,
+            skills: this.state.keywords.map((value) => { return value[0]; }),
+            interests: this.state.interests.map((value) => { return value[0]; })
+        };
+        const res = (await axios.post('https://us-central1-graph-intelligence.cloudfunctions.net/addProject', object, {
+            crossdomain: true
+        })).data;
+        console.log(res);
     }
 
     render() {
@@ -103,14 +116,14 @@ export default class SubmitPage extends Component {
             <div>
                 <Navbar />
                 <div className='container mt-4'>
-                    <form>
+                    <form onSubmit={this.submit}>
                         <div className="form-group">
                             <label htmlFor="title" className="font-weight-bold">Project Title</label>
-                            <input type="text" className="form-control" placeholder="My Project" required></input>
+                            <input type="text" id='name' className="form-control" placeholder="My Project" required></input>
                         </div>
                         <div className="form-group">
                             <label htmlFor="author" className="font-weight-bold">Author</label>
-                            <input type="text" className="form-control" placeholder="John Doe" required></input>
+                            <input type="text" id='author' className="form-control" placeholder="John Doe" required></input>
                         </div>
                         <div className="form-group">
                             <label htmlFor="exampleFormControlInput1" className="font-weight-bold">Email Address</label>
@@ -121,7 +134,7 @@ export default class SubmitPage extends Component {
                             <div className="col">
                                 <div>
                                     <div className='d-inline font-weight-bold'>
-                                        Keywords:
+                                        Skills:
                                     </div>
                                     <div className='d-inline'>
                                         {keywordsList}
@@ -129,8 +142,8 @@ export default class SubmitPage extends Component {
                                 </div>
 
                                 <div className="input-group mt-2">
-                                    <select className="custom-select" id="keyword-select" onChange={this.keywordSelect}>
-                                        <option value='placeholder' selected>Add Keyword...</option>
+                                    <select id='skill' className="custom-select" onChange={this.keywordSelect}>
+                                        <option value='placeholder' selected>Add Skill...</option>
                                         {
                                             posKeywords.map((value) => {
                                                 return (
@@ -152,7 +165,7 @@ export default class SubmitPage extends Component {
                                 </div>
 
                                 <div className="input-group mt-2">
-                                    <select className="custom-select" id="interest-select" onChange={this.interestSelect}>
+                                    <select id='interest' className="custom-select" onChange={this.interestSelect}>
                                         <option value='placeholder' selected>Add Interest...</option>
                                         {
                                             posInterests.map((value) => {
@@ -168,11 +181,11 @@ export default class SubmitPage extends Component {
 
                         <div className="form-group mt-3">
                             <label className="font-weight-bold">Project Description</label>
-                            <textarea className="form-control" rows="3" required></textarea>
+                            <textarea id='description' className="form-control" rows="3" required></textarea>
                         </div>
                         <div className="form-group">
                             <label className="font-weight-bold">Image URL</label>
-                            <input type="text" className="form-control" placeholder="Enter image URL" />
+                            <input id='image-url' type="text" className="form-control" placeholder="Enter image URL" />
                         </div>
 
                         <button className='btn btn-primary'>Submit</button>

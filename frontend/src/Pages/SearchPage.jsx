@@ -97,11 +97,13 @@ export default class SearchPage extends Component {
         this.setState({
             searching: true
         });
-        const res = (await axios.post('https://us-central1-graph-intelligence.cloudfunctions.net/searchProjects?fbclid=IwAR162ulayDPSRpwNfo2-vKlRrsJaouTGLbXY6J7LdrsQsuAgHmzOupDLTlo', {
-            'skills': this.state.keywords,
-            'interests': this.state.interests,
-            'query': document.getElementById('query').value
-        }, {
+        const object = {
+            'skills': this.state.keywords.map((value) => { return (value[0]); }),
+            'interests': this.state.interests.map((value) => { return (value[0]); })
+            //'query': document.getElementById('query').value
+        };
+        console.log(object);
+        const res = (await axios.post('https://us-central1-graph-intelligence.cloudfunctions.net/searchProjects', object, {
             crossdomain: true
         })).data;
         this.setState({
