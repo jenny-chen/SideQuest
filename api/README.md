@@ -8,6 +8,10 @@ Power project search queries.
 Algolia for powering search
 https://itnext.io/how-to-add-fast-realtime-search-to-your-firebase-app-with-algolia-2491f7698d52
 
+https://angularfirebase.com/lessons/angular-full-text-search-with-algolia-backend-part-2/
+
+https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/tutorials/firebase-algolia/#create-a-nodejs-application
+
 Sample request
 ```json
 {
