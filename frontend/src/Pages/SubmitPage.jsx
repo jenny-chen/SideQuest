@@ -14,6 +14,8 @@ export default class SubmitPage extends Component {
         this.state = {
             keywords: [],
             interests: [],
+            success: false,
+            error: false
         };
 
         this.keywordSelect = this.keywordSelect.bind(this);
@@ -85,6 +87,10 @@ export default class SubmitPage extends Component {
 
     async submit(e) {
         e.preventDefault();
+        this.setState({
+            success: false,
+            error: false
+        });
         const object = {
             author: document.getElementById('author').value,
             description: document.getElementById('description').value,
@@ -102,6 +108,9 @@ export default class SubmitPage extends Component {
         document.getElementById('image-url').value = '';
         document.getElementById('name').value = '';
         document.getElementById('link').value = '';
+        this.setState({
+            success: true
+        });
     }
 
     render() {
@@ -196,7 +205,18 @@ export default class SubmitPage extends Component {
                             <label className="font-weight-bold">Image URL</label>
                             <input id='image-url' type="text" className="form-control" placeholder="Enter image URL" />
                         </div>
-
+                        {
+                            this.state.success ?
+                                <div className='alert alert-success'>Sucessfully submitted project!</div>
+                                :
+                                null
+                        }
+                        {
+                            this.state.error ?
+                                <div className='alert alert-danger'>Project already exists in the database!</div>
+                                :
+                                null
+                        }
                         <button className='btn btn-primary'>Submit</button>
                     </form>
                 </div>
