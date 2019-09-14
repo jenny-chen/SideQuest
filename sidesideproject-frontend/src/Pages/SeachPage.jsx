@@ -2,24 +2,24 @@ import React, { Component } from 'react';
 import Navbar from '../Components/Navbar';
 
 const posInterests = [
+    ['design', 'Design'],
+    ['education', 'Education'],
     ['health', 'Healthcare'],
     ['science', 'Science'],
-    ['design', 'Design'],
     ['shopping', 'Shopping'],
     ['sports', 'Sports'],
-    ['education', 'Education'],
 ];
 
 const posKeywords = [
-    ['ml', 'Machine Learning'],
-    ['blockchain', 'Blockchain'],
-    ['api', 'API'],
-    ['ios', 'iOS'],
     ['android', 'Android'],
-    ['web', 'Web'],
+    ['api', 'API'],
+    ['blockchain', 'Blockchain'],
+    ['graphic-design', 'Graphic Design'],
+    ['ios', 'iOS'],
+    ['ml', 'Machine Learning'],
     ['oop', 'Object Oriented'],
     ['scripting', 'Scripting'],
-    ['graphic-design', 'Graphic Design'],
+    ['web', 'Web'],
 ];
 
 
@@ -61,28 +61,6 @@ export default class SearchPage extends Component {
         }
     }
 
-    removeKeyword(value) {
-        this.setState({
-            keywords: this.state.keywords.filter((keyValue) => {
-                return keyValue[0] !== value;
-            })
-        });
-    }
-
-    removeInterest(value) {
-        this.setState({
-            interests: this.state.interests.filter((keyValue) => {
-                return keyValue[0] !== value;
-            })
-        }, () => {
-            if (this.state.interests.length === 0) {
-                this.setState({
-                    interests: [['all', 'All']]
-                });
-            }
-        });
-    }
-
     interestSelect() {
         let alreadyIn = false;
         for (const keywordObj of this.state.interests) {
@@ -103,6 +81,28 @@ export default class SearchPage extends Component {
             });
             document.getElementById('interest-select').value = 'placeholder';
         }
+    }
+
+    removeKeyword(value) {
+        this.setState({
+            keywords: this.state.keywords.filter((keyValue) => {
+                return keyValue[0] !== value;
+            })
+        });
+    }
+
+    removeInterest(value) {
+        this.setState({
+            interests: this.state.interests.filter((keyValue) => {
+                return keyValue[0] !== value;
+            })
+        }, () => {
+            if (this.state.interests.length === 0) {
+                this.setState({
+                    interests: [['all', 'All']]
+                });
+            }
+        });
     }
 
     render() {
