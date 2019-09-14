@@ -14,6 +14,8 @@ export default class SubmitPage extends Component {
         this.state = {
             keywords: [],
             interests: [],
+            success: false,
+            error: false
         };
 
         this.keywordSelect = this.keywordSelect.bind(this);
@@ -41,8 +43,8 @@ export default class SubmitPage extends Component {
                     ]
                 ]
             });
-            document.getElementById('skill').value = 'placeholder';
         }
+        document.getElementById('skill').value = 'placeholder';
     }
 
     interestSelect() {
@@ -63,8 +65,8 @@ export default class SubmitPage extends Component {
                     ]
                 ]
             });
-            document.getElementById('interest').value = 'placeholder';
         }
+        document.getElementById('interest').value = 'placeholder';
     }
 
     removeKeyword(value) {
@@ -85,37 +87,49 @@ export default class SubmitPage extends Component {
 
     async submit(e) {
         e.preventDefault();
+        this.setState({
+            success: false,
+            error: false
+        });
         const object = {
             author: document.getElementById('author').value,
             description: document.getElementById('description').value,
             image: document.getElementById('image-url').value,
             name: document.getElementById('name').value,
             skills: this.state.keywords.map((value) => { return value[0]; }),
-            interests: this.state.interests.map((value) => { return value[0]; })
+            interests: this.state.interests.map((value) => { return value[0]; }),
+            link: document.getElementById('link').value
         };
         const res = (await axios.post('https://us-central1-graph-intelligence.cloudfunctions.net/addProject', object, {
             crossdomain: true
         })).data;
-        console.log(res);
+        document.getElementById('author').value = '';
+        document.getElementById('description').value = '';
+        document.getElementById('image-url').value = '';
+        document.getElementById('name').value = '';
+        document.getElementById('link').value = '';
+        this.setState({
+            success: true
+        });
     }
 
     render() {
         const keywordsList = this.state.keywords.map((value) => {
             return (
-                <span style={{ cursor: 'pointer' }} onClick={() => { this.removeKeyword(value[0]); }} key={value[0]} className="badge badge-secondary ml-1">{value[1]}</span>
+                <span style={{ cursor: 'pointer' }} onClick={() => { this.removeKeyword(value[0]); }} key={value[0]} className="badge badge-secondary ml-1">{value[1]} &times;</span>
             );
         });
 
         const interestsList = this.state.interests.map((value) => {
             return (
-                <span style={{ cursor: 'pointer' }} onClick={() => { this.removeInterest(value[0]); }} key={value[0]} className="badge badge-secondary ml-1">{value[1]}</span>
+                <span style={{ cursor: 'pointer' }} onClick={() => { this.removeInterest(value[0]); }} key={value[0]} className="badge badge-secondary ml-1">{value[1]} &times;</span>
             );
         });
 
         return (
             <div>
                 <Navbar />
-                <div className='container mt-4'>
+                <div className='container my-4'>
                     <form onSubmit={this.submit}>
                         <div className="form-group">
                             <label htmlFor="title" className="font-weight-bold">Project Title</label>
@@ -128,6 +142,10 @@ export default class SubmitPage extends Component {
                         <div className="form-group">
                             <label htmlFor="exampleFormControlInput1" className="font-weight-bold">Email Address</label>
                             <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" required />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="exampleFormControlInput1" className="font-weight-bold">Link</label>
+                            <input type="text" className="form-control" id="link" placeholder="www.example.com" />
                         </div>
 
                         <div className="row">
@@ -166,7 +184,7 @@ export default class SubmitPage extends Component {
 
                                 <div className="input-group mt-2">
                                     <select id='interest' className="custom-select" onChange={this.interestSelect}>
-                                        <option value='placeholder' selected>Add Interest...</option>
+                                        <option value='placeholder' selected>Add Related Fields...</option>
                                         {
                                             posInterests.map((value) => {
                                                 return (
@@ -187,7 +205,18 @@ export default class SubmitPage extends Component {
                             <label className="font-weight-bold">Image URL</label>
                             <input id='image-url' type="text" className="form-control" placeholder="Enter image URL" />
                         </div>
-
+                        {
+                            this.state.success ?
+                                <div className='alert alert-success'>Sucessfully submitted project!</div>
+                                :
+                                null
+                        }
+                        {
+                            this.state.error ?
+                                <div className='alert alert-danger'>Project already exists in the database!</div>
+                                :
+                                null
+                        }
                         <button className='btn btn-primary'>Submit</button>
                     </form>
                 </div>
