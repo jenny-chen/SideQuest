@@ -203,7 +203,7 @@ export default class SubmitPage extends Component {
                         </div>
                         <div className="form-group">
                             <label className="font-weight-bold">Image URL</label>
-                            <input id='image-url' type="text" className="form-control" placeholder="Enter image URL" />
+                            <input id='image-url' type="text" className="form-control" placeholder="Enter image URL" required/>
                         </div>
                         {
                             this.state.success ?
