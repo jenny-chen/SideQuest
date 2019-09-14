@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/SideQuest/static/js/main.c3e3eeb5.chunk.js",
-    "main.js.map": "/SideQuest/static/js/main.c3e3eeb5.chunk.js.map",
+    "main.js": "/SideQuest/static/js/main.54261f4d.chunk.js",
+    "main.js.map": "/SideQuest/static/js/main.54261f4d.chunk.js.map",
     "runtime~main.js": "/SideQuest/static/js/runtime~main.88daebcc.js",
     "runtime~main.js.map": "/SideQuest/static/js/runtime~main.88daebcc.js.map",
-    "static/js/2.668b6dd9.chunk.js": "/SideQuest/static/js/2.668b6dd9.chunk.js",
-    "static/js/2.668b6dd9.chunk.js.map": "/SideQuest/static/js/2.668b6dd9.chunk.js.map",
+    "static/js/2.c099bfa7.chunk.js": "/SideQuest/static/js/2.c099bfa7.chunk.js",
+    "static/js/2.c099bfa7.chunk.js.map": "/SideQuest/static/js/2.c099bfa7.chunk.js.map",
     "index.html": "/SideQuest/index.html",
-    "precache-manifest.2bbe2177103ec98fc91aeed6ef74015e.js": "/SideQuest/precache-manifest.2bbe2177103ec98fc91aeed6ef74015e.js",
+    "precache-manifest.f11aa3601acb247a465bc8695184ad93.js": "/SideQuest/precache-manifest.f11aa3601acb247a465bc8695184ad93.js",
     "service-worker.js": "/SideQuest/service-worker.js"
   }
 }
