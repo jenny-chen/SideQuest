@@ -21,12 +21,9 @@ const queryProjects = async (skills, interests) => {
     }));
 };
 
-// const a = async () => {
-//     console.log(await queryProjects(['Python', 'Ascii']));
-// };
-//
-// a();
-
+const addProject = async(data) => {
+    return (await index.addObject(data));
+}
 
 module.exports = {
     queryProjects

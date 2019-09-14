@@ -1,26 +1,10 @@
 import React, { Component } from 'react';
 import Navbar from '../Components/Navbar';
+import options from '../options.json';
 
-const posInterests = [
-    ['design', 'Design'],
-    ['education', 'Education'],
-    ['health', 'Healthcare'],
-    ['science', 'Science'],
-    ['shopping', 'Shopping'],
-    ['sports', 'Sports'],
-];
+const posInterests = options.interests;
 
-const posKeywords = [
-    ['android', 'Android'],
-    ['api', 'API'],
-    ['blockchain', 'Blockchain'],
-    ['graphic-design', 'Graphic Design'],
-    ['ios', 'iOS'],
-    ['ml', 'Machine Learning'],
-    ['oop', 'Object Oriented'],
-    ['scripting', 'Scripting'],
-    ['web', 'Web'],
-];
+const posKeywords = options.keywords;
 
 export default class SubmitPage extends Component {
     constructor(props) {
