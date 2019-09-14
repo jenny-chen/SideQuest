@@ -4,6 +4,7 @@ let firebase = require('firebase-admin');
 
 const seedProjects = require('./seedProjects.json');
 
+
 // load values from the .env file in this directory into process.env
 dotenv.config();
 
@@ -58,4 +59,14 @@ database.ref('/projects').once('value', projects => {
         .catch(error => {
             console.error('Error when importing contact into Algolia', error);
         });
+});
+
+
+
+// Set filter attributes
+index.setSettings({
+    attributesForFaceting: [
+        'categories', // or 'filterOnly(categories)' for filtering purposes only
+        'store' // or 'filterOnly(store)' for filtering purposes only
+    ]
 });

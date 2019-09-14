@@ -15,10 +15,8 @@ https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-you
 Sample request
 ```json
 {
-    "body": {
       "skills": ["react", "nodejs"],
       "interests": ["healthcare", "non-profit"]
-    }
 }
 ```
 
