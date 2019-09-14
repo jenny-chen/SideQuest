@@ -1,3 +1,3 @@
-# sidesideproject
+# SideQuest
 
-A place for people who don't know what side projects they should make. 
+A web-app for matching people with ideas with people with the skills to realize them. 
