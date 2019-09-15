@@ -13,8 +13,8 @@ export default function HomePage() {
                     <h4>A place for people who don't know what side projects to make.</h4>
                 </div>
                 <div className='mt-5'>
-                    <Link className='btn btn-secondary mr-3' href='./search'>Browse Projects</Link>
-                    <Link className='btn btn-secondary ml-3' href='./submit'>Submit Project</Link>
+                    <Link className='btn btn-secondary mr-3' to='/search'>Browse Projects</Link>
+                    <Link className='btn btn-secondary ml-3' to='/submit'>Submit Project</Link>
                 </div>
             </div>
         </div>
