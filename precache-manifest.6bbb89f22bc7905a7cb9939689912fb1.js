@@ -1,15 +1,15 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "447d43d23d693ba07ec9936f39e3e80e",
+    "revision": "dbc333b7a6091fbf1e786a095c43d0e3",
     "url": "/SideQuest/index.html"
   },
   {
-    "revision": "eed49f1b7ee5ff18e205",
-    "url": "/SideQuest/static/js/2.3ad78d97.chunk.js"
+    "revision": "299a97c6cf8df077f795",
+    "url": "/SideQuest/static/js/2.0bc525a7.chunk.js"
   },
   {
-    "revision": "a8a8251b6b7e01fa62d9",
-    "url": "/SideQuest/static/js/main.901df14e.chunk.js"
+    "revision": "a5b8a651205a2f00ad6f",
+    "url": "/SideQuest/static/js/main.d41c4716.chunk.js"
   },
   {
     "revision": "959c30587ea28305b8a2",
